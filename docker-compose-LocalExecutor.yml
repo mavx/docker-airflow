@@ -12,13 +12,17 @@ services:
                 max-file: "3"
 
     webserver:
-        image: puckel/docker-airflow:1.10.9
+        # image: puckel/docker-airflow:1.10.9
+        build:
+            context: .
+            dockerfile: ./Dockerfile
         restart: always
         depends_on:
             - postgres
         environment:
             - LOAD_EX=n
             - EXECUTOR=Local
+            - FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
         logging:
             options:
                 max-size: 10m
